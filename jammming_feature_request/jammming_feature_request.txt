@@ -1,0 +1,33 @@
+﻿Feature Request: Add Album Thumbnail to Playlist
+March 13, 2018
+
+
+OBJECTIVE
+To create better user experience with album thumbnail image returned in search results and save to playlist.
+BACKGROUND 
+Currently, Jammming returns only text results for the user search. Many users relate to their favorite music visually, through album cover artwork. Where multiple results appear this is even more helpful to the user. Saving the album thumbnail image to the playlist will also improve the overall appearance of the web app, which is currently pretty boring.
+This feature accomplishes the following:
+* Hits Spotify API endpoint to return album thumbnail image.
+* Displays album cover image on right side of search results list.
+* Saves album cover image in playlist.
+TECHNICAL DESIGN
+Retrieve and Display Album Thumbnail Image
+A new key, image, will need to be added to the search(term) function in Spotify.js.
+The image key will have a value of track.artist.items.image.
+To retrieve the image, our API call will use the same URL search string as other endpoints already accessed.  
+________________
+
+
+This component should look as follows upon implementation:
+  
+
+
+
+Formatting Image
+The Spotify images endpoints allows you pick different image sizes. Our API call will return the following image size, in order to keep response time as fast as possible. Our thumbnail does not warrant higher resolution: 
+
+   "height" : 52,
+   "url" : "https://i.scdn.co/image/4f25297750dfa4051195c36809a9049f6b841a23",
+   "width" : 64
+We will need to add a new div element to the div.Track element in index.html. The element should be named div.TrackImage  and be nested under div.Track.
+As the static files for this project were not part of the scope, addition html and css detail is difficult to discern. I recommend setting css property width to ‘100%’ to fill the entire element.
